@@ -1,0 +1,16 @@
+﻿@model IEnumerable<mvc_project_dotnet.Models.Message>
+
+    <div class="text-center">
+        <h1 class="display-4">Messages</h1>
+    </div>
+
+    <div>
+        @foreach (mvc_project_dotnet.Models.Message m in Model!) {
+            <p>Name: @m.Name, Email: @m.Name, Message: @m.Body</p>
+        }
+    </div>
+
+
+
+
+
