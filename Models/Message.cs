@@ -12,5 +12,6 @@ public class Message
     public string? Email { get; set; }
 
     [Required(ErrorMessage = "Please enter your message")]
+    [StringLength(maximumLength: 100, MinimumLength = 10)]
     public string? Body { get; set; }
 }
