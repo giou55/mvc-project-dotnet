@@ -11,6 +11,7 @@ Implemented by List
 
 IEnumerable
 IEnumerable is suitable just for iterating through collection and you cannot modify (Add or Remove) data.
+IEnumerable is read-only and List is not.
 You can instantiate IEnumerable from List:
 IEnumerable<employee> queryIEnumerable = new List<employee>() ;
 
@@ -22,29 +23,32 @@ and then sending filtered data to client.
 A difference between IQueryable and IEnumerable is that you can not instantiate IQueryable from List
 
 
-ARRAY
+Array
 Generic collection, inherits from IEnumerable
-Example: string[] strArray = new string[10];
-Fixed Length -> Its size is not flexible. It is determined at instantiation time.
-Strongly Typed -> Developers determine its type at the instantiation time instead of runtime. This feature makes to run fast at runtime, since it does not need to wait for type definition.
+Array is fixed length. Size can’t be increase or decrease dynamically.
+Array is strongly typed.
 Developers use "foreach" keyword to fill and iterate through array.
 Fixed Length and Strongly Typed consume less memory, therefore it has good performance.
+Array cannot accept null.
+Example: string[] strArray = new string[10];
 
 
 List
-Generic collection
-NOT Fixed Length -> It is possible that data grows.
-Strongly Typed when it is defined "Generic" -> Whenever developers are sure about what is exactly type definition for input or output data and they do not wait until runtime to appear its type. 
-This feature makes to run fast at runtime, since it does not need to wait for type definition.
+Generic collection, inherits from IEnumerable
+list is not fixed length. Size can be increase or decrease dynamically. 
+List is strongly typed.
 Developers use "foreach" keyword to fill and iterate through array.
+List implements IEnumerable, but represents the entire collection in memory.
 
 
 ArrayList
 Non generic collection, inherits from IEnumerable
-Arraylist is NOT Fixed Length -> It is possible that data grows. 
-Arraylist is NOT Strongly Typed -> Whenever developers are not sure about what exactly is type definition 
-for input or output data, they should wait until runtime to appear its type.
+Arraylist is not fixed length. Size can be increase or decrease dynamically. 
+ArrayList is not strongly typed.
 Developers use "foreach" keyword to fill and iterate through arraylist.
+Insertion and deletion operation in ArrayList is slower than an Array.
+ArrayList is not guaranteed to be sorted.
+ArrayList can accepts null.
 Example:
 ArrayList strArrayList = new ArrayList();
 strArrayList.Add("Maria");
