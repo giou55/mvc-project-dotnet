@@ -19,13 +19,36 @@ namespace mvc_project_dotnet.Migrations
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Author", b =>
+                {
+                    b.Property<int?>("AuthorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Bio")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Books")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("AuthorID");
+
+                    b.ToTable("Author");
+                });
+
             modelBuilder.Entity("mvc_project_dotnet.Models.Book", b =>
                 {
-                    b.Property<long?>("BookID")
+                    b.Property<int?>("BookID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
                     b.Property<string>("Author")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CreatedTimestamp")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")

@@ -8,5 +8,6 @@ public class MyDbContext : DbContext
         : base(options) { }
 
     public DbSet<Book> Books => Set<Book>();
+    public DbSet<Author> Author => Set<Author>();
     //public DbSet<Âïïê> Books { get; set; }
 }

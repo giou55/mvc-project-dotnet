@@ -1,6 +1,21 @@
-﻿CREATE A NEW PROJECT:
-dotnet new globaljson --sdk-version 6.0.100 --output ProjectName
-dotnet new mvc --no-https --output ProjectName --framework net6.0
-dotnet new sln -o ProjectName
-dotnet sln ProjectName add ProjectName
+﻿"ConnectionStrings": {
+    "MyConnection": 
+        "server=
+            linuxzone34.grserver.gr;
+            port=3306;
+            user=giourmet449939;
+            password=85!Lh65FdqW;
+            database=sportsstore_dotnet"
+}
 
+
+builder.Services.AddDbContext<StoreDbContext>(opts => {
+    opts.UseSqlServer(
+    builder.Configuration["ConnectionStrings:MyConnection"]);
+});
+
+
+To remove all migrations and start over:
+delete your Migrations folder, 
+drop your database, 
+create a new initial migration.

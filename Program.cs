@@ -12,6 +12,8 @@ builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+
 var app = builder.Build();
 
 app.UseStaticFiles();
@@ -23,5 +25,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+SeedData.EnsurePopulated(app);
 
 app.Run();
