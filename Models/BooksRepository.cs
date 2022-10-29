@@ -9,7 +9,7 @@
             context = ctx;
         }
 
-        public IQueryable<Book> Books => context.Books;
+        public List<Book> Books => context.Books;
 
         public void CreateBook(Book b)
         {

@@ -1,0 +1,92 @@
+ICollection
+ICollection inherits from IEnumerable. 
+There is one difference:
+You can find IEnumerable[ i ] --> Index Based
+You can NOT find ICollection[ i ] --> Not Index Based
+
+
+IList
+Implemented by List
+
+
+IEnumerable
+IEnumerable is suitable just for iterating through collection and you cannot modify (Add or Remove) data.
+You can instantiate IEnumerable from List:
+IEnumerable<employee> queryIEnumerable = new List<employee>() ;
+
+
+IQueryable
+Whenever we encounter huge data with so many records, we have to reduce overhead from application. 
+IQueryable prepares high performance in such situations (huge data) by filtering data firstly 
+and then sending filtered data to client.
+A difference between IQueryable and IEnumerable is that you can not instantiate IQueryable from List
+
+
+ARRAY
+Generic collection, inherits from IEnumerable
+Example: string[] strArray = new string[10];
+Fixed Length -> Its size is not flexible. It is determined at instantiation time.
+Strongly Typed -> Developers determine its type at the instantiation time instead of runtime. This feature makes to run fast at runtime, since it does not need to wait for type definition.
+Developers use "foreach" keyword to fill and iterate through array.
+Fixed Length and Strongly Typed consume less memory, therefore it has good performance.
+
+
+List
+Generic collection
+NOT Fixed Length -> It is possible that data grows.
+Strongly Typed when it is defined "Generic" -> Whenever developers are sure about what is exactly type definition for input or output data and they do not wait until runtime to appear its type. 
+This feature makes to run fast at runtime, since it does not need to wait for type definition.
+Developers use "foreach" keyword to fill and iterate through array.
+
+
+ArrayList
+Non generic collection, inherits from IEnumerable
+Arraylist is NOT Fixed Length -> It is possible that data grows. 
+Arraylist is NOT Strongly Typed -> Whenever developers are not sure about what exactly is type definition 
+for input or output data, they should wait until runtime to appear its type.
+Developers use "foreach" keyword to fill and iterate through arraylist.
+Example:
+ArrayList strArrayList = new ArrayList();
+strArrayList.Add("Maria");
+strArrayList.Add(1); 
+strArrayList.Add(0.89);
+
+
+Dictionary
+Generic collection
+
+
+HashTable
+Non generic collection
+HashTable is another kind of data structure that defines key value for each data section. 
+Therefore finding data is easy just by pointing out to its key. 
+It is NOT strongly typed and NOT fixed size.
+
+
+Stack
+Queue - generic collection
+
+
+Lists, Queues and Arrays are all implementing IEnumerable interface.
+They are generic collections and we can use a foreach loop.
+
+
+Product[] productArray = {
+	new Product {Name = "Kayak", Price = 275M},
+	new Product {Name = "Lifejacket", Price = 48.95M}
+};
+
+
+public List<PizzaModel> Pizzas = new List<PizzaModel>();
+public List<CartLine> Lines { get; set; } = new List<CartLine>();
+
+
+var names = new[] { "Kayak", "Lifejacket", "Soccer ball" };
+
+ANONYMOUS TYPE:
+var products = new[] {
+	new { Name = "Kayak", Price = 275M },
+	new { Name = "Lifejacket", Price = 48.95M },
+	new { Name = "Soccer ball", Price = 19.50M },
+	new { Name = "Corner flag", Price = 34.95M }
+};

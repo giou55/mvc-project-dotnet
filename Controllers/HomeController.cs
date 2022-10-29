@@ -8,6 +8,8 @@ public class HomeController : Controller
 {
     private BooksRepository repository;
 
+    public List<Book> Books = new List<Book>();
+
     public HomeController(BooksRepository repo)
         {
             repository = repo;
@@ -41,10 +43,9 @@ public class HomeController : Controller
         }
     );
 
-    public List<Book>Books = Repository.Books;
-
     public ViewResult Index()
     { 
+        Books = repository.Books;
         return View(Books);
     }
 }
