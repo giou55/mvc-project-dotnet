@@ -14,6 +14,7 @@ Implemented by List
 IEnumerable
 IEnumerable is suitable just for iterating through collection and you cannot modify (Add or Remove) data.
 IEnumerable is read-only and List is not.
+Contains GetEnumerator method.
 You can instantiate IEnumerable from List:
 IEnumerable<employee> queryIEnumerable = new List<employee>() ;
 
@@ -52,7 +53,8 @@ Product[] productArray = {
 -----------------------------------------------------------------------------------------------------
 
 List
-Generic collection, inherits from IEnumerable
+Generic collection 
+Implements ICollection<T>, IEnumerable<T>, IList<T>, IReadOnlyCollection<T>
 list is not fixed length. Size can be increase or decrease dynamically. 
 List is strongly typed.
 Developers use "foreach" keyword to fill and iterate through array.
@@ -60,6 +62,7 @@ List implements IEnumerable, but represents the entire collection in memory.
 
 public List<PizzaModel> Pizzas = new List<PizzaModel>();
 public List<CartLine> Lines { get; set; } = new List<CartLine>();
+List<int> ints = new List<int> { 3, 56, 78, 21, 34, 98, 45, 22 };
 
 -----------------------------------------------------------------------------------------------------
 
