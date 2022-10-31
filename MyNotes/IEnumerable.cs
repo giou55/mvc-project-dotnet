@@ -32,10 +32,15 @@ public class Library : IEnumerable<Book>
 
 	public IEnumerator<Book> GetEnumerator()
 	{
+		//use the code below if _books wasn't a List
+		//together with BookEnumerator class
 		return new BookEnumerator(this);
-		// return _books.GetEnumerator();
+		//use the code below because _books is a List
+		//and delete the BookEnumerator class 
+		return _books.GetEnumerator();
 	}
 
+	// this is for older versions of C# with no Generics
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return GetEnumerator();

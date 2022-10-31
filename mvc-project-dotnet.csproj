@@ -10,12 +10,14 @@
   <ItemGroup>
     <Compile Remove="MyNotes\covariance.cs" />
     <Compile Remove="MyNotes\IEnumerable.cs" />
+    <Compile Remove="MyNotes\linq.cs" />
     <Compile Remove="MyNotes\reflection.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="MyNotes\covariance.cs" />
     <None Include="MyNotes\IEnumerable.cs" />
+    <None Include="MyNotes\linq.cs" />
     <None Include="MyNotes\reflection.cs" />
   </ItemGroup>
 
