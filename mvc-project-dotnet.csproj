@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MyNotes\covariance.cs" />
+    <Compile Remove="MyNotes\reflection.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="MyNotes\covariance.cs" />
+    <None Include="MyNotes\reflection.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

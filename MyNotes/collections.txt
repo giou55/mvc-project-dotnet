@@ -4,10 +4,12 @@ There is one difference:
 You can find IEnumerable[ i ] --> Index Based
 You can NOT find ICollection[ i ] --> Not Index Based
 
+----------------------------------------------------------------------------------------------------
 
 IList
 Implemented by List
 
+------------------------------------------------------------------------------------------------------
 
 IEnumerable
 IEnumerable is suitable just for iterating through collection and you cannot modify (Add or Remove) data.
@@ -15,13 +17,22 @@ IEnumerable is read-only and List is not.
 You can instantiate IEnumerable from List:
 IEnumerable<employee> queryIEnumerable = new List<employee>() ;
 
+------------------------------------------------------------------------------------------------------
 
 IQueryable
-Whenever we encounter huge data with so many records, we have to reduce overhead from application. 
-IQueryable prepares high performance in such situations (huge data) by filtering data firstly 
-and then sending filtered data to client.
+The IQueryable<T> interface is useful because it allows a collection of objects to be queried
+efficiently. 
+Using the IQueryable<T> interface allows me to ask the database for just the objects
+that I require using standard LINQ statements and without needing to know what database server stores
+the data or how it processes the query. 
+Without the IQueryable<T> interface, I would have to retrieve all of the Product objects from the 
+database and then discard the ones that I don’t want, whichbecomes an expensive operation as the 
+amount of data used by an application increases. 
+It is for this reason that the IQueryable<T> interface is typically used instead of IEnumerable<T> 
+in database repository interfaces and classes.
 A difference between IQueryable and IEnumerable is that you can not instantiate IQueryable from List
 
+-----------------------------------------------------------------------------------------------------
 
 Array
 Generic collection, inherits from IEnumerable
@@ -30,8 +41,15 @@ Array is strongly typed.
 Developers use "foreach" keyword to fill and iterate through array.
 Fixed Length and Strongly Typed consume less memory, therefore it has good performance.
 Array cannot accept null.
-Example: string[] strArray = new string[10];
 
+string[] strArray = new string[10];
+
+Product[] productArray = {
+	new Product {Name = "Kayak", Price = 275M},
+	new Product {Name = "Lifejacket", Price = 48.95M}
+};
+
+-----------------------------------------------------------------------------------------------------
 
 List
 Generic collection, inherits from IEnumerable
@@ -39,6 +57,11 @@ list is not fixed length. Size can be increase or decrease dynamically.
 List is strongly typed.
 Developers use "foreach" keyword to fill and iterate through array.
 List implements IEnumerable, but represents the entire collection in memory.
+
+public List<PizzaModel> Pizzas = new List<PizzaModel>();
+public List<CartLine> Lines { get; set; } = new List<CartLine>();
+
+-----------------------------------------------------------------------------------------------------
 
 
 ArrayList
@@ -49,12 +72,13 @@ Developers use "foreach" keyword to fill and iterate through arraylist.
 Insertion and deletion operation in ArrayList is slower than an Array.
 ArrayList is not guaranteed to be sorted.
 ArrayList can accepts null.
-Example:
+
 ArrayList strArrayList = new ArrayList();
 strArrayList.Add("Maria");
 strArrayList.Add(1); 
 strArrayList.Add(0.89);
 
+-----------------------------------------------------------------------------------------------------
 
 Dictionary
 Generic collection
@@ -74,18 +98,12 @@ Queue - generic collection
 Lists, Queues and Arrays are all implementing IEnumerable interface.
 They are generic collections and we can use a foreach loop.
 
-
-Product[] productArray = {
-	new Product {Name = "Kayak", Price = 275M},
-	new Product {Name = "Lifejacket", Price = 48.95M}
-};
-
-
-public List<PizzaModel> Pizzas = new List<PizzaModel>();
-public List<CartLine> Lines { get; set; } = new List<CartLine>();
+-----------------------------------------------------------------------------------------------
 
 
 var names = new[] { "Kayak", "Lifejacket", "Soccer ball" };
+
+--------------------------------------------------------------------------------------------------
 
 ANONYMOUS TYPE:
 var products = new[] {
