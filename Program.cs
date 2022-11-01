@@ -26,6 +26,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//app.MapGet("/", () => "Hello World!");
+//app.MapDefaultControllerRoute();
+
 SeedData.EnsurePopulated(app);
 
 app.Run();

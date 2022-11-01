@@ -14,8 +14,58 @@ builder.Services.AddDbContext<StoreDbContext>(opts => {
     builder.Configuration["ConnectionStrings:MyConnection"]);
 });
 
+--------------------------------------------------------------------------------
 
 To remove all migrations and start over:
 delete your Migrations folder, 
 drop your database, 
 create a new initial migration.
+
+-------------------------------------------------------------------------------
+
+public class Product {
+    public string Name { get; set; }
+    public decimal? Price { get; set; }
+
+    public static Product[] GetProducts() {
+        Product kayak = new Product {
+            Name = "Kayak", Price = 275M
+        };
+
+        Product lifejacket = new Product {
+            Name = "Lifejacket", Price = 48.95M
+        };
+
+        return new Product[] { kayak, lifejacket, null };
+    }
+ }
+
+ --------------------------------------------------------------------------------
+
+public class HomeController : Controller {
+    public ViewResult Index() {
+        return View(new string[] { "C#", "Language", "Features" });
+    }
+ }
+
+Το αρχείο index.cshtml για τον προηγούμενο controller:
+
+@model IEnumerable<string>
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Language Features</title>
+</head>
+<body>
+    <ul>
+        @foreach (string s in Model) {
+            <li>@s</li>
+        }
+    </ul>
+</body>
+</html>
+
+--------------------------------------------------------------------------------
