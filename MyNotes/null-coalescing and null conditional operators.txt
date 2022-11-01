@@ -1,0 +1,57 @@
+﻿This is an especially verbose way of avoiding a null:
+
+public ViewResult Index() {
+    Product?[] products = Product.GetProducts();
+    Product? p = products[0];
+    string val;
+    if (p != null) {
+        val = p.Name;
+    } else {
+        val = "No value";
+    }
+    return View(new string[] { val });
+ }
+
+ -------------------------------------------------------------------------------------------
+Null Conditional Operator (?)
+
+The null conditional operator is a question mark applied before a member is accessed.
+
+The operator returns null if it is applied to a variable that is null.
+In this case, if products[0]  is null, then the operator will return null and 
+prevent an attempt to access the Name property, which would cause an exception.
+Its result must always be assigned to a nullable variable, such as the string?.
+
+The null conditional operator is a more concise way of avoiding member access for null values:
+
+public ViewResult Index() {
+    Product?[] products = Product.GetProducts();
+
+    string? val = products[0]?.Name;
+    if (val != null) {
+        return View(new string[] { val });
+    }
+    return View(new string[] { "No Value" });
+ }
+
+ -------------------------------------------------------------------------------------------
+
+Null-Coalescing Operator (??)
+
+The null-coalescing operator is two question mark characters (??) and is used to provide a 
+fallback value, often used in conjunction with the null conditional operator.
+
+This is a more concise way of performing the same null checks shown in earlier examples:
+
+public ViewResult Index() {
+    Product?[] products = Product.GetProducts();
+    return View(new string[] { products[0]?.Name ?? "No Value" });
+}
+
+The ?? operator returns the value of its left-hand operand if it isn’t null. 
+If the left-hand operand is null, then the ?? operator returns the value of its right-hand operand. 
+
+This behavior works well with the null conditional operator (?). 
+If products[0] is null, then the ? operator will return null, and the ?? operator will
+return "No Value". 
+If products[0] isn’t null, then the result will be the value of its Name property.

@@ -11,7 +11,7 @@
 
 builder.Services.AddDbContext<StoreDbContext>(opts => {
     opts.UseSqlServer(
-    builder.Configuration["ConnectionStrings:MyConnection"]);
+        builder.Configuration["ConnectionStrings:MyConnection"]);
 });
 
 --------------------------------------------------------------------------------
@@ -24,10 +24,10 @@ create a new initial migration.
 -------------------------------------------------------------------------------
 
 public class Product {
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public decimal? Price { get; set; }
 
-    public static Product[] GetProducts() {
+    public static Product?[] GetProducts() {
         Product kayak = new Product {
             Name = "Kayak", Price = 275M
         };
@@ -36,7 +36,7 @@ public class Product {
             Name = "Lifejacket", Price = 48.95M
         };
 
-        return new Product[] { kayak, lifejacket, null };
+        return new Product?[] { kayak, lifejacket, null };
     }
  }
 
@@ -69,3 +69,11 @@ public class HomeController : Controller {
 </html>
 
 --------------------------------------------------------------------------------
+
+Providing a Default Value:
+
+public string Name { get; set; } = string.Empty;
+
+-----------------------------------------------------------------------------
+
+σελίδα στην πάνω μπάρα: 122
