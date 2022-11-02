@@ -1,0 +1,32 @@
+﻿object[] data = new object[] { 
+	275M, 29.95M, "apple", "orange", 100, 10 
+};
+
+decimal total = 0;
+
+for (int i = 0; i < data.Length; i++) {
+	switch (data[i]) {
+		case decimal decimalValue:
+			total += decimalValue;
+			break;
+		case int intValue when intValue > 50:
+			total += intValue;
+			break;
+	}
+}
+
+Console.WriteLine($"Total: {total:C2}"); // Total: $404.95
+
+------------------------------------------------------------------------------------------
+To match any value of a specific type, use the type and variable name in the 
+case statement, like this:
+
+case decimal decimalValue:
+
+This case statement matches any decimal value and assigns it to a new variable called decimalValue.
+To be more selective, the when keyword can be included, like this:
+
+case int intValue when intValue > 50:
+
+This case statement matches int values and assigns them to a variable called intValue, 
+but only when the value is greater than 50.
