@@ -46,7 +46,10 @@ public class Library : IEnumerable<Book>
 		return GetEnumerator();
 	}
 
-	public Book this[int idx] => _books[idx];
+	// the above code also can be written like this
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public Book this[int idx] => _books[idx];
 	public int Count => _books.Count;
 }
 

@@ -20,3 +20,11 @@ itself be null:
 
 Product?[]? arr1 = new Product?[] { kayak, lifejacket, null }; // OK
 Product?[]? arr2 = null; // Also OK
+
+--------------------------------------------------------------------------------------------
+
+public IEnumerable<Product?>? Products { get; set; }
+
+Products property denotes a nullable enumerable of nullable Products, meaning that the 
+Products property may be null and that any sequence of elements assigned to the property 
+may contain null values.
