@@ -1,0 +1,2 @@
+﻿Sometimes, C# async methods don't actually run asynchronously. 
+You can save memory allocation using a ValueTask.
