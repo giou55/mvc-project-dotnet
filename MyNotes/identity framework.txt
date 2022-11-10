@@ -1,0 +1,4 @@
+﻿Installing the package that contains the ASP.NET Core Identity support 
+for Entity Framework Core:
+
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 6.0.0
