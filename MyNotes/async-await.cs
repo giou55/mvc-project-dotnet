@@ -1,0 +1,166 @@
+﻿/* Asynchronous methods perform work in the background and notify you when they are complete, 
+allowing your code to take care of other business while the background work is performed.
+
+Asynchronous methods are an important tool in removing bottlenecks from code and allow 
+applications to take advantage of multiple processors and processor cores to perform work 
+in parallel.
+
+Sometimes, C# async methods don't actually run asynchronously. 
+You can save memory allocation using a ValueTask. */
+
+
+public static Task<long?> GetPageLength() {
+	HttpClient client = new HttpClient();
+	var httpTask = client.GetAsync("http://apress.com");
+	return httpTask.ContinueWith((Task<HttpResponseMessage> antecedent) => {
+		return antecedent.Result.Content.Headers.ContentLength; //lambda expression
+	});
+}
+
+/* .NET represents work that will be done asynchronously as a Task.
+Task objects are strongly typed based on the result that the background work produces. 
+So, when I call the HttpClient.GetAsync method, what I get back is a 
+Task<HttpResponseMessage>. 
+This tells me that the request will be performed in the background and 
+that the result of the request will be an HttpResponseMessage object.
+
+Notice that I use the return keyword twice. This is the part that causes confusion. 
+The first use of the return keyword specifies that I am returning a Task<HttpResponseMessage> 
+object, which, when the task is complete, will return the length of the ContentLength header. 
+The ContentLength header returns a long? result (a nullable long value), 
+and this means the result of my GetPageLength method is Task<long?>.
+
+Microsoft introduced two keywords to C# that simplify using asynchronous methods 
+like HttpClient.GetAsync. 
+The keywords are async and await, and you can see how I have used them to simplify 
+my previous example. */
+
+
+public async static Task<long?> GetPageLength()
+{
+	HttpClient client = new HttpClient();
+	var httpMessage = await client.GetAsync("http://apress.com");
+	return httpMessage.Content.Headers.ContentLength;
+}
+
+/* Applying the await keyword means I can treat the result from the GetAsync method as 
+though it were a regular method and just assign the HttpResponseMessage object that 
+it returns to a variable.
+
+ You can also use the async and await keywords in lambda expressions. */
+
+// An Asynchronous Action Method into a controller using GetPageLength method:
+public class HomeController : Controller
+{
+	public async Task<ViewResult> Index()
+	{
+		long? length = await GetPageLength();
+		return View(new string[] { $"Length: {length}" });
+	}
+}
+
+//An asynchronous enumerable describes a sequence of values that will be generated over time. 
+//To demonstrate the issue that this feature addresses, I created this method: 
+
+public static async Task<IEnumerable<long?>>
+		GetPageLengths(List<string> output, params string[] urls)
+{
+	List<long?> results = new List<long?>();
+	HttpClient client = new HttpClient();
+	foreach (string url in urls)
+	{
+		output.Add($"Started request for {url}");
+		var httpMessage = await client.GetAsync($"http://{url}");
+		results.Add(httpMessage.Content.Headers.ContentLength);
+		output.Add($"Completed request for {url}");
+	}
+	return results;
+}
+
+/*The GetPageLengths method makes HTTP requests to a series of websites and gets their length. 
+The requests are performed asynchronously, but there is no way to feed the results back to 
+the method’s caller as they arrive. 
+Instead, the method waits until all the requests are complete and then returns all the 
+results in one go. 
+In addition to the URLs that will be requested, this method accepts a List<string> to 
+which I add messages in order to highlight how the code works.*/
+
+// Using the new method into a controller:
+
+public class HomeController : Controller
+{
+	public async Task<ViewResult> Index()
+	{
+		List<string> output = new List<string>();
+		foreach (long? len in await GetPageLengths(output,
+		"apress.com", "microsoft.com", "amazon.com"))
+		{
+			output.Add($"Page length: {len}");
+		}
+		return View(output);
+	}
+}
+
+/*output in the browser:
+
+Started request for apress.com
+Completed request for apress.com
+Started request for microsoft.com
+Completed request for microsoft.com
+Started request for amazon.com
+Completed request for amazon.com
+Page length: 26973
+Page length: 199526
+Page length: 357777*/
+
+
+/*You can see that the Index action method doesn’t receive the results until all the HTTP 
+requests have been completed. This is the problem that the asynchronous enumerable feature 
+solves, as shown below:*/
+
+public static async IAsyncEnumerable<long?>
+		GetPageLengths(List<string> output, params string[] urls)
+{
+	HttpClient client = new HttpClient();
+	foreach (string url in urls)
+	{
+		output.Add($"Started request for {url}");
+		var httpMessage = await client.GetAsync($"http://{url}");
+		output.Add($"Completed request for {url}");
+		yield return httpMessage.Content.Headers.ContentLength;
+	}
+}
+
+public class HomeController : Controller
+{
+	public async Task<ViewResult> Index()
+	{
+		List<string> output = new List<string>();
+		await foreach (long? len in GetPageLengths(output,
+		"apress.com", "microsoft.com", "amazon.com"))
+		{
+			output.Add($"Page length: {len}");
+		}
+		return View(output);
+	}
+}
+
+/*The methods result is IAsyncEnumerable<long?>, which denotes an asynchronous sequence 
+of nullable long values. This result type has special support in .NET Core and works with 
+standard yield return statements, which isn’t otherwise possible because the result 
+constraints for asynchronous methods conflict with the yield keyword.*/
+
+//The difference is that the await keyword is applied before the foreach keyword and not 
+//before the call to the async method.
+
+/*output in the browser:
+
+Started request for apress.com
+Completed request for apress.com
+Page length: 26973
+Started request for microsoft.com
+Completed request for microsoft.com
+Page length: 199528
+Started request for amazon.com
+Completed request for amazon.com
+Page length: 441398*/

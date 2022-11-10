@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MyNotes\async-await.cs" />
     <Compile Remove="MyNotes\covariance.cs" />
     <Compile Remove="MyNotes\IEnumerable.cs" />
     <Compile Remove="MyNotes\linq.cs" />
@@ -15,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="MyNotes\async-await.cs" />
     <None Include="MyNotes\covariance.cs" />
     <None Include="MyNotes\IEnumerable.cs" />
     <None Include="MyNotes\linq.cs" />

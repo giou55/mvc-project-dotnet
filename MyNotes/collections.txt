@@ -63,6 +63,7 @@ List implements IEnumerable, but represents the entire collection in memory.
 public List<PizzaModel> Pizzas = new List<PizzaModel>();
 public List<CartLine> Lines { get; set; } = new List<CartLine>();
 List<int> ints = new List<int> { 3, 56, 78, 21, 34, 98, 45, 22 };
+List<long?> results = new List<long?>();
 
 -----------------------------------------------------------------------------------------------------
 
