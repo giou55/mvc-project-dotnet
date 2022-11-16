@@ -6,14 +6,14 @@ namespace mvc_project_dotnet.Controllers;
 
 public class HomeController : Controller
 {
-    private BooksRepository repository;
+    private IBookRepository repository;
 
-    public List<Book> Books = new List<Book>();
+    public IQueryable<Book> Books;
 
-/*    public HomeController(BooksRepository repo)
-        {
-            repository = repo;
-        }*/
+    public HomeController(IBookRepository bookRepo)
+    {
+        repository = bookRepo;
+    }
 
     //public IActionResult Index()
     //{
@@ -45,7 +45,8 @@ public class HomeController : Controller
 
     public ViewResult Index()
     {
-        return View(Books1);
+        Books = repository.Books;
+        return View(Books);
     }
     public string Index2()
     { 

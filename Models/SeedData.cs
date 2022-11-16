@@ -60,7 +60,7 @@ namespace mvc_project_dotnet.Models
                         },
                     new Book
                         {
-                            Title = "Moby-Dick",
+                            Title = "Moby Dick",
                             Description = "Every American writer since 1851 has been chasing the same " +
                                 "whale: to somehow write a novel as epic and influential as Melville’s.",
                             Author = "Herman Melville",
