@@ -1,6 +1,8 @@
-﻿namespace mvc_project_dotnet.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace mvc_project_dotnet.Models
 {
-    public class BooksRepository : IBookRepository
+    public class BooksRepository
     {
         private MyDbContext context;
 
@@ -9,7 +11,7 @@
             context = ctx;
         }
 
-        public List<Book> Books => context.Books;
+        public IQueryable<Book> Books => context.Books;
 
         public void CreateBook(Book b)
         {

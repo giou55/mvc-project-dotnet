@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
 @model List<Book>
 
     <div class="text-center">
@@ -8,7 +9,8 @@
         <p>This is the @ViewData["Title"]</p>
     </div>
 
-    @foreach (var b in Model?.Books)
+    @foreach (var b in Model)
 {
-    <h3>b.Title</h3>
+    <h3>@b.Title</h3>
 }
+

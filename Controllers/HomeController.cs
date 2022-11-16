@@ -10,17 +10,17 @@ public class HomeController : Controller
 
     public List<Book> Books = new List<Book>();
 
-    public HomeController(BooksRepository repo)
+/*    public HomeController(BooksRepository repo)
         {
             repository = repo;
-        }
+        }*/
 
     //public IActionResult Index()
     //{
     //    return View();
     //}
 
-    public List<Book>Books1 = new List<Book>(
+    public List<Book> Books1 = new List<Book> {
         new Book
         {
             Title = "Pride and Prejudice",
@@ -41,11 +41,14 @@ public class HomeController : Controller
             Price = (float)32.50,
             CreatedTimestamp = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
         }
-    );
+    };
 
     public ViewResult Index()
+    {
+        return View(Books1);
+    }
+    public string Index2()
     { 
-        Books = repository.Books;
-        return View(Books);
+        return "Hello";
     }
 }

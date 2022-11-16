@@ -5,14 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("SportsStoreConnection");
 
-builder.Services.AddDbContext<MyDbContext>(options =>
-{
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
-
-builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+builder.Services.AddDbContext<MyDbContext>(
+    options => options.UseSqlServer(
+        builder.Configuration["ConnectionStrings:MyAppConnection"])
+);
 
 var app = builder.Build();
 
