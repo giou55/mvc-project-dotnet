@@ -1,0 +1,52 @@
+﻿@model BookViewModel
+@{
+    Layout = "_Layout";
+}
+
+<h5 class="bg-@Model?.Theme text-white text-center p-2">@Model?.Action</h5>
+
+<form asp-action="@Model?.Action" method="post">
+    <div class="form-group">
+        <label asp-for="Book.BookId"></label>
+        <input class="form-control" asp-for="Book.BookId" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Title"></label>
+        <div>
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
+        </div>
+        <input class="form-control" asp-for="Book.Title"
+               readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Description"></label>
+        <div>
+            <span asp-validation-for="Book.Description" class="text-danger"></span>
+        </div>
+        <input class="form-control" asp-for="Book.Description"
+               readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Author"></label>
+        <div>
+            <span asp-validation-for="Book.Author" class="text-danger"></span>
+        </div>
+        <input class="form-control" asp-for="Book.Author"
+               readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Price"></label>
+        <div>
+            <span asp-validation-for="Book.Price" class="text-danger"></span>
+        </div>
+        <input class="form-control" asp-for="Book.Price"
+               readonly="@Model?.ReadOnly" />
+    </div>
+    @if (Model?.ShowAction == true)
+    {
+        <button class="btn btn-@Model?.Theme mt-2" type="submit">
+            @Model?.Action
+        </button>
+    }
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back</a>
+</form>

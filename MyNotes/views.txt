@@ -34,6 +34,7 @@ ViewBag
     ViewData["Title"] = "About";
 }
 @model WebApplication1.ViewModels.Address
+@model BookViewModel
 
 <h2>@ViewData["Title"].</h2>
 <h2>Contact</h2>
