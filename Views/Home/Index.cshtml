@@ -4,12 +4,12 @@
 
 @model IQueryable<Book>
 
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>This is the @ViewData["Title"]</p>
-    </div>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>This is the @ViewData["Title"]</p>
+</div>
 
-    @foreach (var b in Model)
+@foreach (var b in Model)
 {
     <h3>@b.Title</h3>
     <p>@b.Author</p>

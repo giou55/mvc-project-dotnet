@@ -5,7 +5,7 @@ namespace mvc_project_dotnet.Models
         IQueryable<Book> Books { get; }
 
         void SaveBook(Book p);
-        void CreateBook(Book p);
+        void AddBook(Book p);
         void DeleteBook(Book p);
     }
 }

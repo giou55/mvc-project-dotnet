@@ -11,7 +11,7 @@
 
         public IQueryable<Book> Books => context.Books;
 
-        public void CreateBook(Book b)
+        public void AddBook(Book b)
         {
             context.Add(b);
             context.SaveChanges();
