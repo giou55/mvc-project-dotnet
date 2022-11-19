@@ -21,7 +21,7 @@ namespace mvc_project_dotnet.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.AddBook(book);
+                repository.Add(book);
                 return Redirect("~/Book");
             }
             else

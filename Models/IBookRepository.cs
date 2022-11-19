@@ -3,9 +3,11 @@ namespace mvc_project_dotnet.Models
     public interface IBookRepository
     {
         IQueryable<Book> Books { get; }
-
-        void SaveBook(Book p);
-        void AddBook(Book p);
-        void DeleteBook(Book p);
+        void Add(Book p);
+        Task AddAsync(Book p);
+        Task UpdateAsync(Book p);
+        Task Delete(Book p);
+        void Save(Book p);
+        Task SaveAsync(Book p);
     }
 }

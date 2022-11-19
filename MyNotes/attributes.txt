@@ -47,3 +47,17 @@ public class SampleClass
 
 [ThreadStatic]
 private static int myInt;
+
+------------------------------------------------------------------
+
+//without attribute: private string _name = "unknown";
+private string _name;
+
+[DefaultValue("unknown")]
+public string Name
+{
+    get {return _name;}
+    set{_name = value;}
+}
+
+-------------------------------------------------------------------

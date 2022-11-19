@@ -11,21 +11,34 @@
 
         public IQueryable<Book> Books => context.Books;
 
-        public void AddBook(Book b)
+        public void Add(Book b)
         {
             context.Add(b);
             context.SaveChanges();
         }
-
-        public void DeleteBook(Book b)
+        public async Task AddAsync(Book b)
+        {
+            context.Add(b);
+            await context.SaveChangesAsync();
+        }
+        public async Task UpdateAsync(Book b)
+        {
+            context.Update(b);
+            await context.SaveChangesAsync();
+        }
+        public async Task Delete(Book b)
         {
             context.Remove(b);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void SaveBook(Book b)
+        public void Save(Book b)
         {
             context.SaveChanges();
+        }
+        public async Task SaveAsync(Book b)
+        {
+            await context.SaveChangesAsync();
         }
     }
 }
