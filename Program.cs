@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 using mvc_project_dotnet.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +19,14 @@ builder.Services.AddDbContext<MyDbContext>(
     options => options.UseSqlServer(
         builder.Configuration["ConnectionStrings:MyAppConnection"])
 );
+
+builder.Services.AddDbContext<IdentityContext>(opts =>
+    opts.UseSqlServer(builder.Configuration[
+        "ConnectionStrings:IdentityConnection"]));
+
+//configure application so the Identity database context is set up as a service
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<IdentityContext>();
 
 var app = builder.Build();
 
