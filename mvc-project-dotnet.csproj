@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Compile Remove="MyNotes\async-await.cs" />
-    <Compile Remove="MyNotes\C Sharp\generics.cs" />
     <Compile Remove="MyNotes\covariance.cs" />
     <Compile Remove="MyNotes\IEnumerable.cs" />
     <Compile Remove="MyNotes\linq.cs" />
@@ -17,12 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="MyNotes\C Sharp\async-await.cs" />
-    <None Include="MyNotes\C Sharp\covariance.cs" />
-    <None Include="MyNotes\C Sharp\generics.cs" />
-    <None Include="MyNotes\C Sharp\IEnumerable.cs" />
-    <None Include="MyNotes\C Sharp\linq.cs" />
-    <None Include="MyNotes\C Sharp\reflection.cs" />
+    <Compile Include="MyNotes\C Sharp\async-await.txt" />
+    <Compile Include="MyNotes\C Sharp\covariance.txt" />
+    <Compile Include="MyNotes\C Sharp\IEnumerable.txt" />
+    <Compile Include="MyNotes\C Sharp\linq.txt" />
+    <Compile Include="MyNotes\C Sharp\reflection.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,7 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
