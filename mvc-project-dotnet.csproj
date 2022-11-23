@@ -8,19 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="MyNotes\async-await.cs" />
-    <Compile Remove="MyNotes\covariance.cs" />
-    <Compile Remove="MyNotes\IEnumerable.cs" />
-    <Compile Remove="MyNotes\linq.cs" />
-    <Compile Remove="MyNotes\reflection.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="MyNotes\C Sharp\async-await.txt" />
-    <Compile Include="MyNotes\C Sharp\covariance.txt" />
-    <Compile Include="MyNotes\C Sharp\IEnumerable.txt" />
-    <Compile Include="MyNotes\C Sharp\linq.txt" />
-    <Compile Include="MyNotes\C Sharp\reflection.txt" />
+    <Compile Remove="MyNotes\**" />
+    <Content Remove="MyNotes\**" />
+    <EmbeddedResource Remove="MyNotes\**" />
+    <None Remove="MyNotes\**" />
   </ItemGroup>
 
   <ItemGroup>

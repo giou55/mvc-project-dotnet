@@ -28,6 +28,8 @@ builder.Services.AddDbContext<IdentityContext>(opts =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<IdentityContext>();
 
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
 app.UseStaticFiles();
@@ -39,6 +41,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 //app.MapGet("/", () => "Hello World!");
 //app.MapDefaultControllerRoute();
