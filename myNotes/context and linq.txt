@@ -1,0 +1,16 @@
+﻿public class Repository : IDisposable {
+
+	private PeopleContext _context;
+
+	public Repository(PeopleContext context) {
+		_context = context;
+	}
+
+	public IQuerable<Person> Older (int minAge) {
+		return from p in _context.People where p.Age > minAge select p;
+	}
+
+	public void Dispose() {
+		_context.Dispose();
+	}
+}

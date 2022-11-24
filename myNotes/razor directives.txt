@@ -1,0 +1,57 @@
+﻿Razor directives are represented by implicit expressions with reserved keywords following the @ symbol. 
+A directive typically changes the way a view is parsed or enables different functionality.
+
+@attribute
+The @attribute directive adds the given attribute to the class of the generated page or view.
+
+@code
+The @code block enables a Razor component (.rezor) to add C# members (fields, properties, and methods) to a component.
+For Razor components, @code is an alias of @functions and recommended over @functions.
+
+@functions
+The @functions directive enables adding C# members (fields, properties, and methods) to the generated class.
+In Razor components, use @code over @functions to add C# members.
+
+@implements
+The @implements directive implements an interface for the generated class.
+
+@inherits
+The @inherits directive provides full control of the class the view inherits:
+
+@inject
+The @inject directive enables the Razor Page to inject a service from the service container into a view.
+
+@layout
+The @layout directive specifies a layout for routable Razor components (.razor) that have an @page directive. 
+Layout components are used to avoid code duplication and inconsistency.
+
+@model
+This scenario only applies to MVC views and Razor Pages (.cshtml).
+The @model directive specifies the type of the model passed to a view or page.
+
+@namespace
+The @namespace directive:
+-Sets the namespace of the class of the generated Razor page, MVC view, or Razor component.
+-Sets the root derived namespaces of a pages, views, or components classes from the closest imports 
+ file in the directory tree, _ViewImports.cshtml (views or pages) or _Imports.razor (Razor components).
+
+@page
+The @page directive has different effects depending on the type of the file where it appears:
+-In a .cshtml file indicates that the file is a Razor Page.
+-Specifies that a Razor component should handle requests directly.
+
+@preservewhitespace
+This scenario only applies to Razor components (.razor).
+When set to false (default), whitespace in the rendered markup from Razor components (.razor) is removed if:
+-Leading or trailing within an element.
+-Leading or trailing within a RenderFragment parameter. For example, child content passed to another component.
+-It precedes or follows a C# code block, such as @if or @foreach.
+
+@section
+This scenario only applies to MVC views and Razor Pages (.cshtml).
+The @section directive is used in conjunction with MVC and Razor Pages layouts to enable views or pages to 
+render content in different parts of the HTML page.
+
+@using
+The @using directive adds the C# using directive to the generated view.
+In Razor components, @using also controls which components are in scope.

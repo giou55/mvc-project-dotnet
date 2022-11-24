@@ -1,0 +1,63 @@
+﻿Attributes provide a powerful method of associating metadata, 
+or declarative information, with code (assemblies, types, methods, 
+properties, and so forth). 
+
+After an attribute is associated with a program entity, 
+the attribute can be queried at run time by using a 
+technique called Reflection.
+
+You can add custom attributes to specify any additional 
+information that is required.
+
+You can apply one or more attributes to entire assemblies, 
+modules, or smaller program elements such as classes and properties.
+
+Attributes can accept arguments in the same way as methods and 
+properties.
+
+---------------------------------------------------------------------
+
+By default, an attribute applies to the element that follows it. 
+But you can also explicitly identify, for example, whether an 
+attribute is applied to a method, or to its parameter, 
+or to its return value.
+
+// default: applies to method
+[ValidatedContract]
+int Method1() { return 0; }
+
+// applies to method
+[method: ValidatedContract]
+int Method2() { return 0; }
+
+// applies to parameter
+int Method3([ValidatedContract] string contract) { return 0; }
+
+// applies to return value
+[return: ValidatedContract]
+int Method4() { return 0; }
+
+---------------------------------------------------------------------
+
+[Serializable]
+public class SampleClass
+{
+    // Objects of this type can be serialized.
+}
+
+[ThreadStatic]
+private static int myInt;
+
+------------------------------------------------------------------
+
+//without attribute: private string _name = "unknown";
+private string _name;
+
+[DefaultValue("unknown")]
+public string Name
+{
+    get {return _name;}
+    set{_name = value;}
+}
+
+-------------------------------------------------------------------
