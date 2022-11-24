@@ -1,1 +1,1 @@
-﻿σελίδα 1198 - Validating Passwords
+﻿σελίδα 1222 - Enabling the Identity Authentication Middleware

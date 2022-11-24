@@ -65,6 +65,23 @@ IsInRoleAsync(user, role)		  This method returns true if the user is a member of
 
 ---------------------------------------------------------------------------------------------
 
+Use the SignInManager<T> class to validate the credentials users
+provide and use the built-in middleware to trigger authentication.
+
+Useful SigninManager<T> Members:
+
+PasswordSignInAsync(name, password, persist, lockout)
+This method attempts authentication using the specified username
+and password. The persist argument determines whether a
+successful authentication produces a cookie that persists after the
+browser is closed. The lockout argument determines whether the
+account should be locked if authentication fails.
+
+SignOutAsync() 
+This method signs out the user.
+
+--------------------------------------------------------------------------------------------
+
 ASP.NET Identity requires a database, which is managed through Entity Framework Core:
 
 using Microsoft.AspNetCore.Identity;
