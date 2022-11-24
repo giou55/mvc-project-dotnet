@@ -128,3 +128,26 @@ dotnet ef migrations add --context IdentityContext Initial
 dotnet ef database update --context IdentityContext
 
 --------------------------------------------------------------------------------------------
+
+ASP.NET Core Identity provides a middleware component that detects the cookie created by the
+SignInManager<T> class and populates the HttpContex object with details of the authenticated user.
+
+Enabling middleware in the Program.cs file:
+
+using Microsoft.AspNetCore.Identity;
+
+app.UseAuthentication();
+
+------------------------------------------------------------------------------------------
+
+The middleware sets the value of the HttpContext.User property to a ClaimsPrincipal object. 
+Claims are pieces of information about a user and details of the source of that information, 
+providing a generalpurpose approach to describing the information known about a user.
+
+The ClaimsPrincipal class is part of .NET Core and isn’t directly useful in most ASP.NET Core
+applications, but there are two nested properties that are useful in most applications:
+
+ClaimsPrincipal.Identity.Name 
+This property returns the username, which will be null if there is no user associated with the request.
+ClaimsPrincipal.Identity.IsAuthenticated 
+This property returns true if the user associated with the request has been authenticated.

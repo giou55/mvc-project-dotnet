@@ -47,6 +47,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+//The UseAuthorization method must be called between the UseRouting and UseEndpoints methods
+//and after the UseAuthentication method has been called.
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -59,5 +62,7 @@ app.MapRazorPages();
 //app.MapDefaultControllerRoute();
 
 SeedData.EnsurePopulated(app);
+
+IdentitySeedData.CreateAdminAccount(app.Services, app.Configuration);
 
 app.Run();

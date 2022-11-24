@@ -1,1 +1,1 @@
-﻿σελίδα 1222 - Enabling the Identity Authentication Middleware
+﻿σελίδα 1233 - CHANGING THE AUTHORIZATION URLS
