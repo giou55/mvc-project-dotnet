@@ -57,5 +57,15 @@ To see this page, the URL is http://localhost:5000/users/list
         {
             Users = UserManager.Users; //The Users property returns a collection of IdentityUser objects
         }
+
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            IdentityUser user = await UserManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                await UserManager.DeleteAsync(user);
+            }
+            return RedirectToPage();
+        }
     }
 }

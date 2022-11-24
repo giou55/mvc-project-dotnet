@@ -13,6 +13,8 @@ IdentityUser is the class to represent users in the database.
 This is the built-in class that is provided by ASP.NET Core Identity, 
 and it provides the core features that are required by most applications. 
 
+IdentityRole is the built-in class that Identity provides to describe a role.
+
 ----------------------------------------------------------------------------------------
 
 Useful IdentityUser properties:
@@ -32,6 +34,36 @@ UpdateAsync(user)           This method modifies an existing user in the databas
 DeleteAsync(user)           This method removes the specified user from the database.
 
 -----------------------------------------------------------------------------------------
+
+Useful RoleManager<T> Members:
+
+CreateAsync(role)      Creates a new role
+DeleteAsync(role)      Deletes the specified role
+FindByIdAsync(id)      Finds a role by its ID
+FindByNameAsync(name)  Finds a role by its name
+RoleExistsAsync(name)  Returns true if a role with the specified name exists
+UpdateAsync(role)      Stores changes to the specified role
+Roles                  Returns an enumeration of the roles that have been defined
+
+--------------------------------------------------------------------------------------------
+
+Useful IdentityRole Properties:
+
+Id		This property contains the unique ID for the role.
+Name	This property returns the role name.
+
+---------------------------------------------------------------------------------------------
+
+Although roles are managed through the RoleManager<T> class, membership of roles is managed
+through the methods provided by UserManager<T>:
+
+AddToRoleAsync(user, role)		  This method adds a user to a role.
+RemoveFromRoleAsync(user, role)	  This method removes a user from a role.
+GetRolesAsync(user)				  This method returns the roles for which the user is a member.
+GetUsersInRoleAsync(role)		  This method returns users who are members of the specified role.
+IsInRoleAsync(user, role)		  This method returns true if the user is a member of the specified role
+
+---------------------------------------------------------------------------------------------
 
 ASP.NET Identity requires a database, which is managed through Entity Framework Core:
 
