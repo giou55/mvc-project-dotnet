@@ -138,3 +138,20 @@ Class-based middleware components are added to the pipeline with the UseMiddlewa
 accepts the middleware as a type argument:
 
 app.UseMiddleware<Platform.QueryStringMiddleWare>();
+
+-------------------------------------------------------------------------------------------------
+
+This middleware checks the Path property of the HttpRequest object to see whether the request is
+for the /short URL; if it is, it calls the WriteAsync method without calling the next function.
+Middlewares that don’t pass on requests are said to short-circuit the pipeline.
+
+app.Use(async (context, next) => {
+	if (context.Request.Path == "/short") {
+		await context.Response
+			.WriteAsync($"Request Short Circuited");
+	} else {
+		await next();
+	}
+});
+
+------------------------------------------------------------------------------------------------

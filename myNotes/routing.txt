@@ -1,10 +1,70 @@
-﻿//Using the Routing Middleware in the Program.cs File:
+﻿There are two methods for routing: UseRouting and UseEndpoints.
+The UseRouting method adds the middleware responsible for processing requests to the pipeline. 
+The UseEndpoints method is used to define the routes that match URLs to endpoints.
+
 
 app.UseRouting();
 
-// ------ http://localhost:5000/routing ----------
 app.UseEndpoints(endpoints => {
 	endpoints.MapGet("routing", async context => {
 		await context.Response.WriteAsync("Request Was Routed");
 	});
 });
+
+-------------------------------------------------------------------------------------------------
+
+There are no arguments to the UseRouting method. 
+The UseEndpoints method receives a function that accepts an IEndpointRouteBuilder object and 
+uses it to create routes using the extension methods.
+
+The IEndpointRouteBuilder Extension Methods:
+
+MapGet(pattern, endpoint) 
+This method routes HTTP GET requests that match the URL pattern to the endpoint.
+
+MapPost(pattern, endpoint) 
+This method routes HTTP POST requests that match the URL pattern to the endpoint.
+
+MapPut(pattern, endpoint) 
+This method routes HTTP PUT requests that match the URL pattern to the endpoint.
+
+MapDelete(pattern, endpoint) 
+This method routes HTTP DELETE requests that match the URL pattern to the endpoint.
+
+MapMethods(pattern, methods, endpoint)
+This method routes requests made with one of the specified HTTP methods that match 
+the URL pattern to the endpoint.
+
+Map(pattern, endpoint) 
+This method routes all HTTP requests that match the URL pattern to the endpoint.
+
+-----------------------------------------------------------------------------------------
+
+Using middleware components to create new instances of the classes to select the Invoke 
+method as the endpoint:
+
+app.UseEndpoints(endpoints => {
+	endpoints.MapGet("routing", async context => {
+		await context.Response.WriteAsync("Request Was Routed");
+	});
+	endpoints.MapGet("capital/uk", new Capital().Invoke);
+	endpoints.MapGet("population/paris", new Population().Invoke);
+});
+
+Simplifying the previous code:
+
+app.MapGet("routing", async context => {
+	await context.Response.WriteAsync("Request Was Routed");
+});
+app.MapGet("capital/uk", new Capital().Invoke);
+app.MapGet("population/paris", new Population().Invoke);
+
+-----------------------------------------------------------------------------------------
+
+Fallback routes direct a request to an endpoint only when no other route matches a request. 
+
+app.MapFallback(async context => {
+	await context.Response.WriteAsync("Routed to fallback endpoint");
+});
+
+----------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@ using mvc_project_dotnet.Models;
 using mvc_project_dotnet.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,19 @@ builder.Services.Configure<IdentityOptions>(opts => {
 
 //The result of the Build method is a WebApplication object, which is used to set up middleware components.
 var app = builder.Build();
+
+//this custom middleware checks the Path property of the HttpRequest object to see whether the request is
+//for the /short URL; if it is, it calls the WriteAsync method without calling the next function.
+app.Use(async (context, next) => {
+    if (context.Request.Path == "/short")
+    {
+        await context.Response.WriteAsync($"Hello from Request Short Circuited");
+    }
+    else
+    {
+        await next();
+    }
+});
 
 //adding a custom class-based middleware
 app.UseMiddleware<QueryStringMiddleWare>();
