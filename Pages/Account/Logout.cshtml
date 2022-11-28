@@ -17,9 +17,17 @@
             signInManager = signInMgr;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             await signInManager.SignOutAsync(); //The ASP.NET Core Identity cookie will be deleted
+            return RedirectToPage("account/login");
+
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await signInManager.SignOutAsync(); //The ASP.NET Core Identity cookie will be deleted
+            return Redirect("/");
         }
     }
 }

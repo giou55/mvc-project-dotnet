@@ -1,7 +1,7 @@
 ﻿The methods available in ASP.NET Core for redirection are:
 
-Redirect
-RedirectToAction
+Redirect -> return Redirect("/");
+RedirectToAction -> return RedirectToAction("index", "home");
 RedirectToPage -> return RedirectToPage("Home");
 RedirectToRoute
 LocalRedirect

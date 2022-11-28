@@ -68,7 +68,7 @@ IsInRoleAsync(user, role)		  This method returns true if the user is a member of
 Use the SignInManager<T> class to validate the credentials users
 provide and use the built-in middleware to trigger authentication.
 
-Useful SigninManager<T> Members:
+Useful SignInManager<T> Members:
 
 PasswordSignInAsync(name, password, persist, lockout)
 This method attempts authentication using the specified username
@@ -79,6 +79,9 @@ account should be locked if authentication fails.
 
 SignOutAsync() 
 This method signs out the user.
+
+IsSignedIn(User)
+Returns true if the user is logged in with identity.
 
 --------------------------------------------------------------------------------------------
 

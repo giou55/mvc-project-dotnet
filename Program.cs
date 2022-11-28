@@ -60,7 +60,7 @@ app.Use(async (context, next) => {
     }
 });
 
-//adding a custom class-based middleware
+//adding a custom class-based middleware from Middlewares folder
 app.UseMiddleware<QueryStringMiddleWare>();
 
 app.UseStaticFiles();
