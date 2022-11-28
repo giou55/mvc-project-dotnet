@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.Security.Principal;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace mvc_project_dotnet.Models
 {

@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using mvc_project_dotnet.Models;
+using mvc_project_dotnet.Middlewares;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,13 +43,18 @@ builder.Services.Configure<IdentityOptions>(opts => {
     opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
 });
 
+//The result of the Build method is a WebApplication object, which is used to set up middleware components.
 var app = builder.Build();
+
+//adding a custom class-based middleware
+app.UseMiddleware<QueryStringMiddleWare>();
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthentication();
+
 //The UseAuthorization method must be called between the UseRouting and UseEndpoints methods
 //and after the UseAuthentication method has been called.
 app.UseAuthorization();

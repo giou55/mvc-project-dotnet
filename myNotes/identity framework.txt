@@ -151,3 +151,24 @@ ClaimsPrincipal.Identity.Name
 This property returns the username, which will be null if there is no user associated with the request.
 ClaimsPrincipal.Identity.IsAuthenticated 
 This property returns true if the user associated with the request has been authenticated.
+
+-----------------------------------------------------------------------------------------
+
+The /Account/Login and /Account/AccessDenied URLs are the defaults used by ASP.NET Core
+authorization files. These can be changed in the Program.cs file using the options pattern, like this: 
+
+builder.Services.Configure<CookieAuthenticationOptions>(
+		IdentityConstants.ApplicationScheme,
+	opts => {
+		opts.LoginPath = "/Authenticate";
+		opts.AccessDeniedPath = "/NotAllowed";
+	});
+
+Configuration is performed using the CookieAuthenticationOptions class, defined in the
+Microsoft.AspNetCore.Authentication.Cookies namespace. 
+The LoginPath property is used to specify the path to which browsers will be redirected 
+when an unauthenticated user attempts to access a restricted endpoint. 
+The AccessDeniedPath property is used to specify the path when an authenticated user 
+attempts to access a restricted endpoint and does not have authorization.
+
+-----------------------------------------------------------------------------------------

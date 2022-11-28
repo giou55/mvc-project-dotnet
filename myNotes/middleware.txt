@@ -1,1 +1,140 @@
-﻿
+﻿You can create your own middleware, and the key method for creating middleware is Use.
+
+----------------------------------------------------------------------------------------------------
+
+Custom middleware:
+
+app.Use(async (context, next) => {
+
+	//check the HTTP method and query string to identify GET requests that have a custom parameter 
+	//in the query string whose value is true
+	if (context.Request.Method == HttpMethods.Get
+		&& context.Request.Query["custom"] == "true") {
+
+		//for GET requests with the expected query string, the middleware function uses the ContentType property 
+		//to set the Content-Type header and uses the WriteAsync method to add a string to the body of the response.
+		context.Response.ContentType = "text/plain";
+		await context.Response.WriteAsync("Hello from Custom Middleware \n");
+	}
+	await next();
+});
+
+Use a browser to request http://localhost:5000/?custom=true. 
+You will see that the new middleware function writes its message to the response before passing 
+on the request to the next middleware component.
+
+------------------------------------------------------------------------------------------------
+
+The Use method registers a middleware component that is typically expressed as a lambda function.
+
+The arguments to the lambda function are an HttpContext object and a function that is invoked to tell
+ASP.NET Core to pass the request to the next middleware component in the pipeline.
+
+The HttpContext object describes the HTTP request and the HTTP response and provides additional
+context, including details of the user associated with the request. 
+
+-----------------------------------------------------------------------------------------------
+
+Useful HttpContext members:
+
+Connection 
+This property returns a ConnectionInfo object that provides information about the
+network connection underlying the HTTP request, including details of local and remote
+IP addresses and ports.
+
+Request 
+This property returns an HttpRequest object that describes the HTTP request being
+processed.
+
+RequestServices 
+This property provides access to the services available for the request.
+
+Response 
+This property returns an HttpResponse object that is used to create a response to the
+HTTP request.
+
+Session 
+This property returns the session data associated with the request.
+
+User 
+This property returns details of the user associated with the request.
+
+Features 
+This property provides access to request features, which allow access to the low-level
+aspects of request handling.
+
+-----------------------------------------------------------------------------------------------
+
+The ASP.NET Core platform is responsible for processing the HTTP request to create the HttpRequest
+object from HttpContext.Request property.
+
+Useful HttpRequest members:
+
+Body			This property returns a stream that can be used to read the request body.
+ContentLength	This property returns the value of the Content-Length header.
+ContentType		This property returns the value of the Content-Type header.
+Cookies			This property returns the request cookies.
+Form			This property returns a representation of the request body as a form.
+Headers			This property returns the request headers.
+IsHttps			This property returns true if the request was made using HTTPS.
+Method			This property returns the HTTP verb — also known as the HTTP method — used for the request.
+Path			This property returns the path section of the request URL.
+Query			This property returns the query string section of the request URL as key-value pairs.
+
+------------------------------------------------------------------------------------------------
+
+The HttpResponse object (from HttpContext.Response property) describes the HTTP response that will be sent 
+back to the client when the request has made its way through the pipeline.
+
+Useful HttpResponse members:
+
+ContentLength		This property sets the value of the Content-Length header.
+ContentType			This property sets the value of the Content-Type header.
+Cookies				This property allows cookies to be associated with the request.
+HasStarted			This property returns true if ASP.NET Core has started to send the response headers to
+						the client, after which it is not possible to make changes to the status code or headers.
+Headers				This property allows the response headers to be set.
+StatusCode			This property sets the status code for the response.
+WriteAsync(data)	This asynchronous method writes a data string to the response body.
+Redirect(url)		This method sends a redirection response.
+
+-------------------------------------------------------------------------------------------------
+
+Middleware can also be defined using classes. 
+
+Add a class file named Middleware.cs in the Platform Folder:
+
+public class QueryStringMiddleWare {
+	private RequestDelegate next;
+
+	public QueryStringMiddleWare(RequestDelegate nextDelegate) {
+		next = nextDelegate;
+	}
+
+	public async Task Invoke(HttpContext context) {
+		if (context.Request.Method == HttpMethods.Get
+				&& context.Request.Query["custom"] == "true") {
+			if (!context.Response.HasStarted) {
+				context.Response.ContentType = "text/plain";
+			}
+			await context.Response.WriteAsync("Class-based Middleware \n");
+		}
+		await next(context);
+	}
+}
+
+Middleware classes receive a RequestDelegate as a constructor parameter, which is used to forward the
+request to the next component in the pipeline. The Invoke method is called by ASP.NET Core when a request
+is received and receives an HttpContext object that provides access to the request and response, using the
+same classes that lambda function middleware receives. The RequestDelegate returns a Task, which allows
+it to work asynchronously.
+
+One important difference in class-based middleware is that the HttpContext object must be used as an
+argument when invoking the RequestDelegate to forward the request, like this:
+
+await next(context);
+
+Class-based middleware components are added to the pipeline with the UseMiddleware method, which
+accepts the middleware as a type argument:
+
+app.UseMiddleware<Platform.QueryStringMiddleWare>();
