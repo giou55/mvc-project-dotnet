@@ -3,7 +3,8 @@ using mvc_project_dotnet.Models;
 using mvc_project_dotnet.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
-using System;
+using mvc_project_dotnet.Services;
+using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +63,22 @@ app.Use(async (context, next) => {
 
 //adding a custom class-based middleware from Middlewares folder
 app.UseMiddleware<QueryStringMiddleWare>();
+
+app.UseMiddleware<WeatherMiddleware>();
+
+//We use singleton pattern to share a single TextResponseFormatter so it is used by a middleware
+//component and an endpoint, with the effect that a single counter is incremented by requests for two
+//different URLs
+app.MapGet("middleware/function", async (context) => {
+    await TextResponseFormatter.Singleton.Format(context,
+    "Middleware Function: It is snowing in Chicago");
+});
+app.MapGet("endpoint/function", async context => {
+    await TextResponseFormatter.Singleton.Format(context,
+    "Endpoint Function: It is sunny in LA");
+});
+
+app.MapGet("endpoint/class", WeatherEndpoint.Endpoint);
 
 app.UseStaticFiles();
 

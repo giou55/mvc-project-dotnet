@@ -14,3 +14,21 @@ builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MyIdentityDbContext>();
+
+--------------------------------------------------------------------------------------
+
+Most projects have features that need to be used in different parts of the application, 
+which are known as services. 
+Common examples include logging tools and configuration settings but can extend to any shared
+feature.
+
+------------------------------------------------------------------------------------------
+
+There are two main approaches to make services locatable (aside from Dependency Injection):
+
+1.The first approach is to create an object and use it as a constructor or
+  method argument to pass it to the part of the application where it is required.
+
+2.The other approach is to add a static property to the service class that provides direct access 
+  to the shared instance. This is known as the singleton pattern, and it was a common approach before 
+  the widespread use of dependency injection.

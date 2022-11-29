@@ -1,0 +1,47 @@
+﻿Τhey are usually used for tasks that are needed in multiple parts of the application, 
+such as logging or database access.
+
+It results in components that are easier to isolate for unit testing.
+
+---------------------------------------------------------------------------------------------
+
+EXAMPLE:
+
+public interface IResponseFormatter {
+    Task Format(HttpContext context, string content);
+}
+
+public class HtmlResponseFormatter : IResponseFormatter {
+    public async Task Format(HttpContext context, string content) {
+        context.Response.ContentType = "text/html";
+        await context.Response.WriteAsync($@"
+            <!DOCTYPE html>
+            <html lang=""en"">
+            <head>
+                <title>Response</title>
+            </head>
+            <body>
+                <h2>Formatted Response</h2>
+                <span>{content}</span>
+            </body>
+            </html>");
+    }
+}
+
+In Program.cs file:
+
+builder.Services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
+
+app.MapGet("middleware/function", async (HttpContext context, IResponseFormatter formatter) => {
+    await formatter.Format(context, "It is snowing in Chicago");
+});
+
+//we used the AddSingleton method to create a service for the IResponseFormatter interface
+
+//the AddSingleton method is one of the extension methods available for services and tells ASP.NET
+//Core that a single object should be used to satisfy all demands for the service
+
+//IResponseFormatter and HtmlResponseFormatter are the interface and the implementation class that
+//are specified as generic type arguments
+
+//since the service is registered, we can consume the service

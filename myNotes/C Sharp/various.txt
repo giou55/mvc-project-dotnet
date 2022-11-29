@@ -1,0 +1,46 @@
+﻿public interface IResponseFormatter {
+    void Format(string content);
+}
+
+public class TextResponseFormatter : IResponseFormatter {
+    public void Format(string content) {
+        Console.WriteLine(content);
+    }
+}
+
+public static class MyClass {
+	private static IResponseFormatter formatter = new TextResponseFormatter();
+	public static IResponseFormatter Formatter => formatter;
+}
+
+MyClass.Formatter.Format("It is snowing in Chicago");
+
+//the Formatter public property provides access to a object that implements the
+//IResponseFormatter interface
+
+------------------------------------------------------------------------------------------
+
+//providing a Default Value
+
+public string Name { get; set; } = string.Empty;
+
+-----------------------------------------------------------------------------------------
+
+public class Product {
+    public string Name { get; set; } = string.Empty;
+    public decimal? Price { get; set; }
+
+    public static Product?[] GetProducts() {
+        Product kayak = new Product {
+            Name = "Kayak", Price = 275M
+        };
+        Product lifejacket = new Product {
+            Name = "Lifejacket", Price = 48.95M
+        };
+        return new Product?[] { kayak, lifejacket, null };
+    }
+}
+
+ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+
+------------------------------------------------------------------------------------------
