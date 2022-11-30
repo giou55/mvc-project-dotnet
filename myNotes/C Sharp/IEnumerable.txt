@@ -19,8 +19,9 @@ using (IEnumerator<int> i = ints.GetEnumerator())
 		Console.WriteLine(i.Current);
 }
 
+------------------------------------------------------------------------------------
 
-// Implementing IEnumerable for Library ------------------------------------------------ 
+// Implementing IEnumerable for Library 
 public class Library : IEnumerable<Book>
 {
 	private List<Book> _books = new List<Book>();
@@ -99,3 +100,26 @@ static void Main()
 
 	Console.WriteLine(library.Max(b => b.Title));
 }
+
+---------------------------------------------------------------------------------------
+
+public class WeatherForecast
+{
+    public DateOnly Date { get; set; }
+    public int TemperatureC { get; set; }
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public string? Summary { get; set; }
+}
+
+public IEnumerable<WeatherForecast> Get()
+{
+	return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+	{
+		Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+		TemperatureC = Random.Shared.Next(-20, 55),
+		Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+	})
+	.ToArray();
+}
+
+---------------------------------------------------------------------------------------
