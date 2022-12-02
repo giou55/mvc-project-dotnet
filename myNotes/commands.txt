@@ -28,3 +28,12 @@ VARIOUS:
 dotnet dev-certs https --clean (cleans https development certificates from the machine)
 dotnet dev-certs https --trust (creates and trusts a new https certificate)
 dotnet restore
+
+TOOLS:
+dotnet tool list -g (diplays all tools are installed globally, like dotnet-ef)
+dotnet tool install --global dotnet-ef --version 7.0.0 (installs dotnet-ef tool globally)
+dotnet tool uninstall --global dotnet-ef --version 7.0.0 (uninstalls dotnet-ef tool globally)
+dotnet tool update --global dotnet-ef (updates a global or local tool)
+
+BUILD:
+dotnet build
