@@ -1,0 +1,25 @@
+An entirely new feature in .NET 7 is the support for tar archives.
+
+---------------------------------------------------------------------------
+
+Also System.Linq got improving adjustments.
+The new methods Order and OrderDescending sort an IEnumerable based on the type T. 
+At the same time, IQueryable also supports these interfaces.
+
+-------------------------------------------------------------------------------
+
+The DateTime, DateTimeOffset, TimeSpan, and Time-Only classes can now be used with microseconds and nanoseconds.
+
+---------------------------------------------------------------------------------
+
+AOT stands for Ahead of Time, and the Native AOT project has been moved from experimental to official.
+
+----------------------------------------------------------------------------------
+
+.NET 7 will include full annotations for all assemblies and types in the Microsoft.Extensions.Configuration namespace.
+
+-------------------------------------------------------------------------------------
+
+.NET 7 includes improvements to System.Text.Json serialization.
+
+---------------------------------------------------------------------------
