@@ -23,6 +23,7 @@ RUN APPLICATION:
 dotnet run
 dotnet run -lp https (run at specific profile)
 dotnet watch
+dotnet watch --no-hot-reload (at every change it builds again)
 
 VARIOUS:
 dotnet dev-certs https --clean (cleans https development certificates from the machine)
